@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+/* ===== Bảng màu thương hiệu HP (lấy từ logo) ===== */
+@theme {
+  --color-brand: #4e8a3c; /* xanh lá chủ đạo */
+  --color-brand-dark: #356b2a;
+  --color-brand-darker: #234a1c;
+  --color-brand-bright: #8bb34d; /* xanh lá sáng (gradient) */
+  --color-brand-light: #eaf3e2;
+  --color-brand-soft: #f5faf0;
+  --color-accent: #e08218; /* cam điểm nhấn (chấm tròn trong logo) */
+  --color-accent-dark: #c06d12;
+  --color-ink: #1f2a24;
+  --color-muted: #5b6b62;
+  --color-line: #e3ebe5;
+
+  --font-sans: var(--font-be-vietnam), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #1f2a24;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tiện ích dùng lại */
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 1140px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.85rem 1.6rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1;
+    transition: all 0.18s ease;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--color-brand);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: var(--color-brand-dark);
+  }
+  .btn-accent {
+    background: var(--color-accent);
+    color: #fff;
+  }
+  .btn-accent:hover {
+    background: var(--color-accent-dark);
+  }
+  .btn-ghost {
+    background: #fff;
+    color: var(--color-brand-dark);
+    border: 1px solid var(--color-line);
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-brand);
+    color: var(--color-brand-dark);
+  }
+}
+
+/* Hiệu ứng xuất hiện nhẹ */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  animation: fade-up 0.5s ease both;
+}
