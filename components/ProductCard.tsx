@@ -5,7 +5,7 @@ import type { Product } from "@/lib/types";
 export default function ProductCard({ p }: { p: Product }) {
   return (
     <Link
-      href={`/san-pham/${p.ma}`}
+      href={`/san-pham/chi-tiet?ma=${encodeURIComponent(p.ma)}`}
       className="group flex flex-col bg-white border border-line rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all"
     >
       <div className="relative aspect-square bg-brand-soft overflow-hidden">

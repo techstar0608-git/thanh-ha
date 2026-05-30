@@ -1,18 +1,14 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import ProductsGrid from "@/components/ProductsGrid";
+import { Loading } from "@/components/StateBlocks";
 
 export const metadata: Metadata = {
   title: "Sản phẩm",
   description: "Danh sách sản phẩm phân bón & dinh dưỡng cây trồng.",
 };
 
-export default async function ProductsPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ loai?: string }>;
-}) {
-  const { loai } = await searchParams;
-
+export default function ProductsPage() {
   return (
     <>
       <section className="bg-gradient-to-br from-brand-light to-brand-soft border-b border-line">
@@ -29,7 +25,9 @@ export default async function ProductsPage({
 
       <section className="py-14">
         <div className="container-x">
-          <ProductsGrid initialLoai={loai} />
+          <Suspense fallback={<Loading />}>
+            <ProductsGrid />
+          </Suspense>
         </div>
       </section>
     </>

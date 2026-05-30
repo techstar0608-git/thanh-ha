@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { loaiKey, useProducts } from "@/lib/products";
 import ProductCard from "./ProductCard";
 import { Loading, ErrorBlock, EmptyBlock } from "./StateBlocks";
 
 const ALL = "all";
 
-export default function ProductsGrid({ initialLoai }: { initialLoai?: string }) {
+export default function ProductsGrid() {
+  const initialLoai = useSearchParams().get("loai") ?? undefined;
   const { products, loading, error } = useProducts();
   const [sel, setSel] = useState<string>(initialLoai || ALL);
 

@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useMemo, useState } from "react";
 import { loaiKey, useProducts } from "@/lib/products";
 import SmartImage from "@/components/SmartImage";
 import ProductCard from "@/components/ProductCard";
@@ -11,13 +11,27 @@ import { site } from "@/lib/site";
 import type { Product } from "@/lib/types";
 
 export default function ProductDetailPage() {
-  const params = useParams<{ slug: string }>();
-  const slug = decodeURIComponent(params.slug);
+  return (
+    <Suspense
+      fallback={
+        <div className="container-x py-20">
+          <Loading label="Đang tải sản phẩm…" />
+        </div>
+      }
+    >
+      <ProductDetailInner />
+    </Suspense>
+  );
+}
+
+function ProductDetailInner() {
+  const searchParams = useSearchParams();
+  const ma = searchParams.get("ma") ?? "";
   const { products, loading, error } = useProducts();
 
   const product = useMemo(
-    () => products.find((p) => p.ma === slug),
-    [products, slug]
+    () => products.find((p) => p.ma === ma),
+    [products, ma]
   );
   const related = useMemo(
     () =>
